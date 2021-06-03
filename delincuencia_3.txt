@@ -1,0 +1,33 @@
+"state" "population" "total"
+"Alabama" 4779736 135
+"Alaska" 710231 19
+"Colorado" 5029196 65
+"Connecticut" 3574097 97
+"Hawaii" 1360301 7
+"Idaho" 1567582 12
+"Illinois" 12830632 364
+"Indiana" 6483802 142
+"Iowa" 3046355 21
+"Kansas" 2853118 63
+"Kentucky" 4339367 116
+"Maine" 1328361 11
+"Massachusetts" 6547629 118
+"Minnesota" 5303925 53
+"Montana" 989415 12
+"Nebraska" 1826341 32
+"New Hampshire" 1316470 5
+"New Jersey" 8791894 246
+"New York" 19378102 517
+"North Carolina" 9535483 286
+"North Dakota" 672591 4
+"Ohio" 11536504 310
+"Oklahoma" 3751351 111
+"Oregon" 3831074 36
+"Rhode Island" 1052567 16
+"South Dakota" 814180 8
+"Utah" 2763885 22
+"Vermont" 625741 2
+"Washington" 6724540 93
+"West Virginia" 1852994 27
+"Wisconsin" 5686986 97
+"Wyoming" 563626 5

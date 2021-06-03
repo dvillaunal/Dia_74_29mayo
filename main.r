@@ -1,38 +1,24 @@
-```{r, eval=FALSE, include=TRUE}
-"Protocolo:
+## ---- eval=FALSE, include=TRUE-----------------------------------------------
+## "Protocolo:
+## 
+##  1. Daniel Felipe Villa Rengifo
+## 
+##  2. Lenguaje: R
+## 
+##  3. Tema: Manejo de la libreria tidyvverse
+## 
+##  4. Fuentes:
+##     https://rpubs.com/Rene_Diaz/716415
+##     https://www.policia.gov.co/grupo-informacion-criminalidad/estadistica-delictiva"
 
- 1. Daniel Felipe Villa Rengifo
 
- 2. Lenguaje: R
-
- 3. Tema: Manejo de la libreria tidyvverse
-
- 4. Fuentes:
-    https://rpubs.com/Rene_Diaz/716415
-    https://www.policia.gov.co/grupo-informacion-criminalidad/estadistica-delictiva"
-```
-
-# LIbreria Tidyverse:
-
-Tidyverse es una librería que resume la mayor parte de las tareas que tiene que realizar un data-scientist. Se trata de una aportación de uno de los mayores gurúes de R: Hadley Wicham y que resume un trabajo genial realizado por este brillante data-scientist durante años.
-
-La idea básica es dotar a R de un lenguaje muy potente de tratamiento de todas las tareas a realizar a la hora de crear conocimiento.
-
-```{r}
+## ----------------------------------------------------------------------------
 # Instalamos el paquete:
 #install.packages("tidyverse", dependencies = T)
 library(tidyverse)
-```
 
-presentamos algunos de los aspectos más utilizadas del tidyverse, comenzando con el paquete __dplyr__ para manipular los data frames y el paquete __purrr__ para trabajar con las funciones. Tengan en cuenta que el __tidyverse__ también incluye un paquete para graficar, __ggplot2__, el paquete __readr__, entre otros.
 
-# Datos tidy
-
-Para ver un ejemplo sobre los datos tidy cargaremos la base de datos "AsesinatosFBI.csv", que contiene:
-
-+ Datos de asesinatos con armas de fuego de informes del FBI. También contiene la población de cada estado.
-
-```{r}
+## ----------------------------------------------------------------------------
 # Importamos la base:
 # Utilizamos lafuncion read_csv de readr en vez de read.csv del paquete base de R
 assasins <- read_csv(file = "AsesinatosFBI.csv")
@@ -40,13 +26,9 @@ assasins <- read_csv(file = "AsesinatosFBI.csv")
 #Cada fila representa un estado con cada una de las cinco columnas proveyendo una variable diferente relacionada con estos estados: nombre, abreviatura, región, población y total de asesinatos.
 
 "Es un ejermplo de un data frame tidy"
-```
 
-# Cómo manipular los data frames
 
-El paquete __dplyr__ del tidyverse ofrece funciones que realizan algunas de las operaciones más comunes cuando se trabaja con data frames y usa nombres para estas funciones que son relativamente fáciles de recordar. Por ejemplo, para cambiar la tabla de datos agregando una nueva columna, utilizamos `mutate`. Para filtrar la tabla de datos a un subconjunto de filas, utilizamos `filter`. Finalmente, para subdividir los datos seleccionando columnas específicas, usamos `select`.
-
-```{r}
+## ----------------------------------------------------------------------------
 # Vamos añadir una nueva columna que tenga la tasa sobre 100.000 personas de asesionos por estado:
 
 "estos datos estan aproximados a 2 cifras decimales"
@@ -65,32 +47,20 @@ print(assasins)
 bajadelincuencia <- filter(assasins, tasaX100000 <= 3)
 cat("Como podemos ver devuelve un dataframe:\n")
 print(bajadelincuencia)
-```
 
-# Cómo seleccionar columnas con select:
 
-como sabemos que ya filtramos la tasa de delincuencia a menores o iguales a 3, entonces solamente nos sirven las otras columnas y esas las seleccionamos con `select`
-
-```{r}
+## ----------------------------------------------------------------------------
 delincuencia_3 <- dplyr::select(bajadelincuencia, state, population,total)
 write.table(delincuencia_3, file= "delincuencia_3.txt", row.names = F)
-```
 
-# pipe operator: %>%
 
-Con dplyr, podemos realizar una serie de operaciones, por ejemplo select y entonces filter, enviando los resultados de una función a otra usando lo que se llama el pipe operator: %>%.
-
- + En general, el pipe envía el resultado que se encuentra en el lado izquierdo del pipe para ser el primer argumento de la función en el lado derecho del pipe. Aquí vemos un ejemplo sencillo:
- 
-```{r}
+## ----------------------------------------------------------------------------
 cat("16 %>% sqrt() # <- Raiz Cuadradrada de 16 (sqrt(16)=4)", "\n \nOUTPUT:\n")
 print(16 %>% sqrt())
 
-```
- 
- > NOTA: Por lo tanto, al usar el pipe con data frames y dplyr, ya no necesitamos especificar el primer argumento requerido puesto que las funciones dplyr que hemos descrito toman todos los datos como el primer argumento.
- 
-```{r}
+
+
+## ----------------------------------------------------------------------------
 # Vamos a mostrar tres variables (estado, region, tasa) para los estados que tienen tasas de asesinatos por debajo de 1.5
 
 bajadelincuencia <- assasins %>%
@@ -99,13 +69,9 @@ bajadelincuencia <- assasins %>%
 
 write.csv(bajadelincuencia, file = "bajadelincuencia.csv", row.names = F, sep = ",")
 print(bajadelincuencia)
-```
- 
-Tienen más librerias pero en otras ocaciones las veremos, ya que lagunas son tan extensas como `ggplot2`
 
-Ahora haremos un ejercicio con la libreria tidyverse:
 
-```{r}
+## ----------------------------------------------------------------------------
 # Sacaremos los datos de la pagina de la policia sobre hurto a personas:
 # PERÍODO COMPRENDIDO ENTRE EL 01 DE ENERO AL 30 DE ABRIL AÑO 2021
 
@@ -137,9 +103,9 @@ hurto$X.AGRUPA.EDAD.PERSONA <- as.factor(hurto$X.AGRUPA.EDAD.PERSONA)
 # Convetimos en fecha para un trabajo más sencillo:
 library(lubridate)
 hurto$FECHA.HECHO <- dmy(hurto$FECHA.HECHO)
-```
 
-```{r}
+
+## ----------------------------------------------------------------------------
 # Cargamos la libreria de ser necesario
 #library(ggplot2)
 
@@ -155,4 +121,3 @@ robo + xlab("Tipo de Arma para el Robo") + ylab("Frecuencia") + ggtitle("Arma qu
 dev.off()
 
 "Como podemos ver, la mayor arma es el engaño, muchas veces no llevan armas y solamente con la intimidación consiguen lo que quieren, es decir un hombre intimida (ya que como vemos los que más roban son hombres sin armas)"
-```
